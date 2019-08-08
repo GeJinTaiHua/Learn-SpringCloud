@@ -22,13 +22,15 @@
 3. 处理Aware接口
    + BeanNameAware接口：setBeanName()
    + BeanFactoryAware接口：setBeanFactory()
+   + ApplicationContextAware接口：setApplicationContext()
 4. BeanPostProcessor
-   + postProcessBeforeInitialization接口：前置处理器
-   + postProcessAfterInitialization接口：后置处理器
-5. InitializingBean 与 init-method
+   + 前置处理器：postProcessBeforeInitialization接口
+   + 后置处理器：postProcessAfterInitialization接口
+5. InitializingBean接口、init-method声明
+   + afterPropertiesSet()
 6. 使用Bean
-7. DisposableBean
-8. destroy-method
+7. DisposableBean接口、destroy-method声明
+   + destory()
 
 ##### Spring Bean的作用域
 + singleton：默认，单例。
