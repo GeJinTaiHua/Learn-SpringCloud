@@ -16,7 +16,7 @@
   
 #### Spring
 ##### Spring Bean的生命周期
-![bean](/Interview-Java/Pic/bean.png)
+![bean](https://github.com/GeJinTaiHua/Sum-Up-Up-Up/tree/master/Interview-Java/Pic/bean.png)
 1. 实例化Bean对象
 2. 设置对象属性（依赖注入）
 3. 处理Aware接口
