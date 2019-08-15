@@ -39,21 +39,21 @@
 + session：不同Session使用不同的实例。
 + global-session：同session作用域不同的是，所有的Session共享一个Bean实例。
 
-##### bean 条件化
+##### Bean 条件化
 + Profile Bean：使用@Profile注解指定某个bean属于哪一个profile。在应用部署到相应的环境中时，只要确保相应的profile处于激活状态就可以执行相关的bean。
 ```
 @Bean
-  @Profile("dev") //开发环境使用这个bean，通过嵌入式数据库获得DataSource
-  public DataSource embeddedDataSource(){
-    return ...
-  }
+@Profile("dev") //开发环境使用这个bean，通过嵌入式数据库获得DataSource
+public DataSource embeddedDataSource(){
+  return ...
+}
 ```
 ```
-spring.profiles.default
-spring.profiles.active 
+spring.profiles.default=dev
+spring.profiles.active=dev
 ```
 
-+ 条件化的bean
++ 条件化的Bean
 ```
 @Bean
 //条件化的创建bean
@@ -71,6 +71,7 @@ public class MagicExistsCondition implements Condition{
     return env.containsProperty("magic");
   }
 }
+```
 
 ##### Spring 事务
 + 5种事务隔离级别
