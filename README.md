@@ -4,7 +4,7 @@
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.1.3-brightgreen.svg)
 ![build passing](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
-### 项目结构
+#### 项目结构
 + basic（公用）：定义公用接口、公用类；
 + customer-app(消费者)
   + http://localhost:3001/api/app/swagger-ui.html
@@ -14,7 +14,7 @@
   + http://localhost:1111/
   ![](/pic/eureka1111.png)
   
-#### Spring
+#### Spring 
 ##### Spring Bean的生命周期
 ![bean](/pic/springBean.png)
 1. 实例化Bean对象
@@ -39,7 +39,21 @@
 + session：不同Session使用不同的实例。
 + global-session：同session作用域不同的是，所有的Session共享一个Bean实例。
 
-##### Spring事务
+##### Profile Bean
+使用@Profile注解指定某个bean属于哪一个profile。在应用部署到相应的环境中时，只要确保相应的profile处于激活状态就可以执行相关的bean。
+```
+@Bean
+  @Profile("dev") //开发环境使用这个bean，通过嵌入式数据库获得DataSource
+  public DataSource embeddedDataSource(){
+    return ...
+  }
+```
+```
+spring.profiles.default
+spring.profiles.active 
+```
+
+##### Spring 事务
 + 5种事务隔离级别
 
 |Isolation|隔离级别|不可避免|
