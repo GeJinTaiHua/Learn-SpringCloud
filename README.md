@@ -15,7 +15,7 @@
   ![](/pic/eureka1111.png)
   
 #### Spring 
-##### Spring Bean的生命周期
+##### Spring Bean 生命周期
 ![bean](/pic/springBean.png)
 1. 实例化Bean对象
 2. 设置对象属性（依赖注入）
@@ -32,15 +32,15 @@
 7. DisposableBean接口、destroy-method声明
    + destory()
 
-##### Spring Bean的作用域
+##### Spring Bean 作用域
 + singleton：默认，单例。
 + prototype：每次返回的都是一个新的实例。
 + request：每次HTTP请求都会创建一个新的Bean，适用于WebApplicationContext环境。
 + session：不同Session使用不同的实例。
 + global-session：同session作用域不同的是，所有的Session共享一个Bean实例。
 
-##### Profile Bean
-使用@Profile注解指定某个bean属于哪一个profile。在应用部署到相应的环境中时，只要确保相应的profile处于激活状态就可以执行相关的bean。
+##### bean 条件化
++ Profile Bean：使用@Profile注解指定某个bean属于哪一个profile。在应用部署到相应的环境中时，只要确保相应的profile处于激活状态就可以执行相关的bean。
 ```
 @Bean
   @Profile("dev") //开发环境使用这个bean，通过嵌入式数据库获得DataSource
@@ -52,6 +52,25 @@
 spring.profiles.default
 spring.profiles.active 
 ```
+
++ 条件化的bean
+```
+@Bean
+//条件化的创建bean
+@Conditional(MagicExistsCondition.class)
+publc MagicBean magicBean(){
+  return new MagicBean();
+}
+```
+```
+public class MagicExistsCondition implements Condition{
+  @Override
+  public boolean matches(ConditionContext context,AnnotatedTypeMetadata metadata){
+    Environment env = context.getEnvironment();
+    //假设此时需要的属性为“magic”
+    return env.containsProperty("magic");
+  }
+}
 
 ##### Spring 事务
 + 5种事务隔离级别
