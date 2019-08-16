@@ -13,7 +13,16 @@
 + register(注册中心)：使用eureka作为注册中心。
   + http://localhost:1111/
   ![](/pic/eureka1111.png)
-  
+
+#### Spring Cloud
++ Spring Cloud Config：配置管理中心
++ Spring Cloud Rureka：注册中心
++ Spring Cloud Hystrix：熔断器
++ Spring Cloud Zuul：服务网关
++ Spring Cloud Security + OAuth2：安全认证
++ Spring Cloud Stream + Kafka ：消息驱动
++ Spring Cloud Sleuth + Zipkin：服务链路追踪
+
 #### Spring 
 ##### Spring Bean 生命周期
 ![bean](/pic/springBean.png)
