@@ -9,14 +9,14 @@
 
 + customer-1(消费者)
   + http://localhost:3001/api/app/swagger-ui.html
-  ![](/pic/swagger3001.png)
+  ![](/basic/pic/swagger3001.png)
   
 + provider-1(生产者)
   + http://localhost:2001
 
 + register(注册中心)：使用eureka作为注册中心。
   + http://localhost:1001/
-  ![](/pic/eureka1001.png)
+  ![](/basic/pic/eureka1001.png)
 
 #### Spring Cloud
 + Spring Cloud Config：配置管理中心
@@ -29,7 +29,7 @@
 
 #### Spring 
 ##### Spring Bean 生命周期
-![bean](/pic/springBean.png)
+![bean](/basic/pic/springBean.png)
 1. 实例化Bean对象
 2. 设置对象属性（依赖注入）
 3. 处理Aware接口
