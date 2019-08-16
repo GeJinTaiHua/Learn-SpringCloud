@@ -6,12 +6,16 @@
 
 #### 项目结构
 + basic（公用）：定义公用接口、公用类；
-+ customer-app(消费者)
+
++ customer-1(消费者)
   + http://localhost:3001/api/app/swagger-ui.html
   ![](/pic/swagger30001.png)
-+ provider-common(生产者)
+  
++ provider-1(生产者)
+  + http://localhost:2001
+
 + register(注册中心)：使用eureka作为注册中心。
-  + http://localhost:1111/
+  + http://localhost:1001/
   ![](/pic/eureka1111.png)
 
 #### Spring Cloud
