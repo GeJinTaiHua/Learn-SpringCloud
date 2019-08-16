@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration scan="true" scanPeriod="30 seconds">
 
-    <property name="LOG_PATH" value="${user.dir}/provider-1-logs"/>
+    <property name="LOG_PATH" value="${user.dir}/log/provider-1-logs"/>
 
     <!-- 日志记录器，日期滚动记录 -->
     <appender name="FILEERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
