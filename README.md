@@ -9,14 +9,14 @@
 
 + customer-1(消费者)
   + http://localhost:3001/api/app/swagger-ui.html
-  ![](/pic/swagger30001.png)
+  ![](/pic/swagger3001.png)
   
 + provider-1(生产者)
   + http://localhost:2001
 
 + register(注册中心)：使用eureka作为注册中心。
   + http://localhost:1001/
-  ![](/pic/eureka1111.png)
+  ![](/pic/eureka1001.png)
 
 #### Spring Cloud
 + Spring Cloud Config：配置管理中心
