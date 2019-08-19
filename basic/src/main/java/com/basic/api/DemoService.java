@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * Demo示例-接口定义
  **/
-@FeignClient("provider-1")
+@FeignClient("provider-2")
 public interface DemoService {
     @PostMapping("/fegin/test/getDemo")
     DemoVO getDemoVo(@RequestBody DemoDTO demoDTO);
