@@ -29,6 +29,7 @@ public class Swagger {
         ParameterBuilder parameterBuilder = new ParameterBuilder();
         parameterBuilder.name("AuthorToken").description("AuthorToken")
                 .modelRef(new ModelRef("string")).parameterType("header")
+                .defaultValue("token_demo_dev_13600")
                 .required(false).build();
 
         List<Parameter> parameters = new ArrayList<>();
