@@ -12,6 +12,7 @@
         <module>basic</module>
         <module>customer-1</module>
         <module>provider-1</module>
+        <module>provider-2</module>
         <module>register</module>
     </modules>
 
