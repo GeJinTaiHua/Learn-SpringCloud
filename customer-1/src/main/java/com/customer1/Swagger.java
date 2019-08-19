@@ -46,9 +46,9 @@ public class Swagger {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("API-开发使用")
-                .description("RESTful API都在此列表")
-                .termsOfServiceUrl("接口文档")
+                .title("API title")
+                .description("API escription")
+                .termsOfServiceUrl("API termsOfServiceUrl")
                 .version("1.0")
                 .build();
     }
