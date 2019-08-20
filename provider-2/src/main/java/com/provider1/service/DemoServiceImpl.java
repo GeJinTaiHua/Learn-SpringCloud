@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Demo示例-提供者1-Server层
+ * Demo示例-提供者-Server层
  **/
 @RestController
 public class DemoServiceImpl implements DemoService {
