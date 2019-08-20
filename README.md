@@ -6,14 +6,13 @@
 
 #### 项目结构
 + basic（公用）：定义公用接口、公用类；
-
 + customer-1(消费者)
   + http://localhost:3001/api/app/swagger-ui.html
   ![](/basic/pic/swagger3001.png)
-  
 + provider-1(生产者)
   + http://localhost:2001
-
++ provider-2(生产者)
+  + http://localhost:2002
 + register(注册中心)：使用eureka作为注册中心。
   + http://localhost:1001/
   ![](/basic/pic/eureka1001.png)
@@ -117,3 +116,4 @@ public class MagicExistsCondition implements Condition{
   + 方法不是public；
   + 新建了调用对象；
   + unchecked、捕获异常；
+

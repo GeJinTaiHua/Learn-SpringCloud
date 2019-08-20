@@ -12,7 +12,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  **/
 @EnableFeignClients(basePackages = {"com.basic.api"})// 启用feign客户端
 @EnableAspectJAutoProxy() // 开启AOP
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class}) // 排除掉DB
 @EnableCircuitBreaker // 使服务能够使用 Hystrix 和 Ribbon
 //@EnableEurekaClient // 使用 Eureka ，可省略
 //@EnableDiscoveryClient // 使用注册中心（包括 Eureka），可省略
