@@ -11,8 +11,6 @@ import org.springframework.http.HttpStatus;
 @Slf4j
 @Configuration
 public class FeignClientErrorDecoder implements ErrorDecoder {
-
-
     @Override
     public Exception decode(String methodKey, Response response) {
         if (response.status() != HttpStatus.OK.value()) {
@@ -20,7 +18,7 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
             String errorContent;
             try {
                 errorContent = Util.toString(response.body().asReader());
-                log.info("FeignClientErrorDecoder-------:{}",errorContent);
+                log.info("FeignClientErrorDecoder-------:{}", errorContent);
                 Exception rpcApiException = JSON.parseObject(errorContent, Exception.class);
                 return rpcApiException;
             } catch (Exception e) {

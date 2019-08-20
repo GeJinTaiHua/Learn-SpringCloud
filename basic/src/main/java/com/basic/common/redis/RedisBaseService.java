@@ -1,6 +1,5 @@
 package com.basic.common.redis;
 
-
 import java.util.List;
 
 /**

@@ -1,10 +1,10 @@
 package com.customer1.common.exception;
 
-import com.customer1.common.constants.ResultCodeConstants;
 import com.baidu.unbiz.fluentvalidator.exception.RuntimeValidateException;
 import com.basic.common.exception.RepeatException;
-import com.basic.common.util.StringUtil;
 import com.basic.domain.HttpResult;
+import com.customer1.common.constants.ResultCodeConstants;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -53,7 +53,7 @@ public class ExceptionHandle {
                     undeclaredThrowableException.getUndeclaredThrowable() != null
                     ) {
                 String message = undeclaredThrowableException.getUndeclaredThrowable().getMessage();
-                if (StringUtil.isNotEmpty(message)) {
+                if (StringUtils.isNotEmpty(message)) {
                     //抛给前端
                     return HttpResult.failResult(message);
                 }
