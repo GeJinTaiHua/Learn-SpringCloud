@@ -4,7 +4,7 @@
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.1.3-brightgreen.svg)
 ![build passing](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
-#### 项目结构
+### 项目结构
 + basic（公用）：定义公用接口、公用类；
 + customer-1(消费者)
   + http://localhost:3001/api/app/swagger-ui.html
@@ -17,7 +17,7 @@
   + http://localhost:1001/
   ![](/basic/pic/eureka1001.png)
 
-#### Spring Cloud
+### Spring Cloud
 + Spring Cloud Config：配置管理中心
 + ✔️Spring Cloud Rureka：注册中心
 + Spring Cloud Hystrix：熔断器
@@ -26,8 +26,8 @@
 + Spring Cloud Stream + Kafka ：消息驱动
 + Spring Cloud Sleuth + Zipkin：服务链路追踪
 
-#### Spring 
-##### Spring Bean 生命周期
+### Spring 
+#### Spring Bean 生命周期
 ![bean](/basic/pic/springBean.png)
 1. 实例化Bean对象
 2. 设置对象属性（依赖注入）
@@ -44,14 +44,14 @@
 7. DisposableBean接口、destroy-method声明
    + destory()
 
-##### Spring Bean 作用域
+#### Spring Bean 作用域
 + singleton：默认，单例。
 + prototype：每次返回的都是一个新的实例。
 + request：每次HTTP请求都会创建一个新的Bean，适用于WebApplicationContext环境。
 + session：不同Session使用不同的实例。
 + global-session：同session作用域不同的是，所有的Session共享一个Bean实例。
 
-##### Bean 条件化
+#### Bean 条件化
 + Profile Bean：使用@Profile注解指定某个bean属于哪一个profile。在应用部署到相应的环境中时，只要确保相应的profile处于激活状态就可以执行相关的bean。
 ```
 @Bean
@@ -85,7 +85,7 @@ public class MagicExistsCondition implements Condition{
 }
 ```
 
-##### Spring 事务
+#### Spring 事务
 + 5种事务隔离级别
 
 |Isolation|隔离级别|不可避免|
