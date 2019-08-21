@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  **/
 @IgnoreToken
 @Api("示例")
-@RestController
+@RestController // 与@Controller相比，不需要开发者返回ResponseBody类
 @RequestMapping(value = "/demo")
 public class DemoController extends AppBaseController {
     @Autowired

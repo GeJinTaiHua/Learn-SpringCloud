@@ -27,7 +27,7 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
             }
 
         }
-        return new Exception("rpcApiException");
 
+        return new Exception("rpcApiException");
     }
 }

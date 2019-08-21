@@ -35,10 +35,12 @@ public class ExceptionHandle {
             AssertException appException = (AssertException) e;
             return new HttpResult<>(appException.getMsg(), appException.getCode(), appException.getData());
         }
+
         //参数校验失败
         if (e instanceof MethodArgumentNotValidException || e instanceof RuntimeValidateException) {
-            return HttpResult.failResultByCode(ResultCodeConstants.CODE_S0006);
+            return HttpResult.failResultByCode(ResultCodeConstants.RESULT_CODE_FAIL);
         }
+
         //请求方式异常不进行错误日志打印
         if (!(e instanceof HttpRequestMethodNotSupportedException)) {
             logger.error("【系统异常】", e);
@@ -64,11 +66,8 @@ public class ExceptionHandle {
             // 还有拿得了业务层异常信息就拿，拿不了报错，吃掉异常往后走，不影响整个流程。
         }
 
-        //参数校验失败
-
-        return HttpResult.failResult(ResultCodeConstants.getMsg(ResultCodeConstants.CODE_S0003));
+        return HttpResult.failResult(ResultCodeConstants.getMsg(ResultCodeConstants.RESULT_CODE_FAIL));
     }
-
 
     /**
      * 400 - Bad Request

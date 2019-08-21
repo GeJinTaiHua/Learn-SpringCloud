@@ -116,3 +116,8 @@ public class MagicExistsCondition implements Condition{
   + 新建了调用对象；
   + unchecked、捕获异常；
 
+#### JSON协议
++ 轻量级，传递数据没有太大的文本开销；
++ 易于人们的阅读和消费；
++ 是JavaScript使用的默认序列化协议；
+
