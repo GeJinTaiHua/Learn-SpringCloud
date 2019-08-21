@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @IgnoreToken
 @Api("示例")
 @RestController
-@RequestMapping(value = "/api/demo")
+@RequestMapping(value = "/demo")
 public class DemoController extends AppBaseController {
     @Autowired
     private DemoService demoService;
