@@ -5,16 +5,19 @@
 
 ### 项目结构
 + basic（公用）：定义公用接口、公用类；
-+ customer-1(消费者)
-  + http://localhost:3001/api/app/swagger-ui.html
-  ![](/basic/pic/swagger3001.png)
-+ provider-1(生产者)
-  + http://localhost:2001
-+ provider-2(生产者)
-  + http://localhost:2002
-+ register(注册中心)：使用eureka作为注册中心。
+
++ register(注册中心)1001：使用 SpringCloud Eureka 作为注册中心。
   + http://localhost:1001/
   ![](/basic/pic/eureka1001.png)
+  
++ provider-1(生产者)2001
++ provider-2(生产者)2002  
+
++ customer-1(消费者)3001
+  + http://localhost:3001/api/app/swagger-ui.html
+  ![](/basic/pic/swagger3001.png)
+
++ config(配置中心)4001：使用 SpringCloud Config 作为配置中心。
 
 ### Spring Cloud
 + Spring Cloud Config：配置管理中心
