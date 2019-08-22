@@ -3,7 +3,7 @@
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.1.3-brightgreen.svg)
 ![build passing](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
-### 项目结构
+### 一、项目结构
 + basic（公用）：定义公用接口、公用类；
 
 + register(注册中心)1001：使用 SpringCloud Eureka 作为注册中心。
@@ -19,7 +19,7 @@
 
 + config(配置中心)4001：使用 SpringCloud Config 作为配置中心。
 
-### Spring Cloud
+### 二、Spring Cloud
 + Spring Cloud Config：配置管理中心
 + ✔️Spring Cloud Netflix Eureka：注册中心
 + Spring Cloud Netflix Hystrix：熔断器
@@ -28,7 +28,7 @@
 + Spring Cloud Stream + Kafka ：消息驱动
 + Spring Cloud Sleuth + Zipkin：服务链路追踪
 
-### Spring 
+### 三、Spring 
 #### Spring Bean 生命周期
 ![bean](/basic/pic/springBean.png)
 1. 实例化Bean对象
