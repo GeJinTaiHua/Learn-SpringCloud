@@ -5,13 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.web.client.RestTemplate;
 
-/**
- * start application
- **/
 @RefreshScope // 配置中心动态刷新
 @EnableDiscoveryClient // 激活Discovery客户端
 @EnableFeignClients(basePackages = {"com.basic.api"})// 激活feign客户端
@@ -21,6 +21,13 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 //@EnableEurekaClient // 使用 Eureka ，可省略
 //@EnableDiscoveryClient // 使用注册中心（包括 Eureka），可省略
 public class Customer1Application {
+
+    @Bean
+    @LoadBalanced // 告诉springcloud创建一个支持ribbon的RestTemplate类
+    public RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(Customer1Application.class, args);
     }

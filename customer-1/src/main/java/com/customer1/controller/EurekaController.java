@@ -21,4 +21,11 @@ public class EurekaController {
         String result = eurekaService.discoverTest();
         return result;
     }
+
+    @ApiOperation(value = "Rest示例")
+    @RequestMapping(value = "/restTest", method = RequestMethod.POST)
+    public String restTest() {
+        String result = eurekaService.restTest();
+        return result;
+    }
 }

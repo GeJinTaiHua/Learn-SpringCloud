@@ -16,6 +16,9 @@ public class EurekaServiceImpl implements EurekaService {
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     @Override
     public String discoverTest() {
         RestTemplate restTemplate = new RestTemplate();
@@ -28,5 +31,16 @@ public class EurekaServiceImpl implements EurekaService {
             String result = responseEntity.getBody();
             return result;
         }
+    }
+
+    /**
+     * 支持ribbon的restTemplate
+     */
+    @Override
+    public String restTest() {
+        String serviceUrl = "http://provider-2/restTest";
+        ResponseEntity<String> responseEntity = restTemplate.exchange(serviceUrl, HttpMethod.POST, null, String.class);
+        String result = responseEntity.getBody();
+        return result;
     }
 }

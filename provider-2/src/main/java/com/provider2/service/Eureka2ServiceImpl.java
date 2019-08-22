@@ -9,4 +9,9 @@ public class Eureka2ServiceImpl {
     String discoverTest() {
         return "discoverTest 成功";
     }
+
+    @PostMapping("/restTest")
+    String restTest() {
+        return "restTest 成功";
+    }
 }
