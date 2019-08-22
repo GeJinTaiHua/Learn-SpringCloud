@@ -9,7 +9,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
  * start application
  **/
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-@EnableEurekaServer
+@EnableEurekaServer // 此服务成为Eureka服务
 public class RegisterApplication {
     public static void main(String[] args) {
         SpringApplication.run(RegisterApplication.class, args);
