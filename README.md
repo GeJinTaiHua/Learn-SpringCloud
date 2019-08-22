@@ -20,7 +20,7 @@
 + config(配置中心)4001：使用 SpringCloud Config 作为配置中心。
 
 ### 二、Spring Cloud Netflix
-#### Spring Cloud Config（配置中心）
+#### ✔️Spring Cloud Config（配置中心）
 
 #### ✔️Spring Cloud Netflix Eureka（注册中心）
 + 当服务通过Eureka注册时，Eureka将在30s内等待3次健康检查，然后才能通过Eureka获取该服务。
