@@ -19,15 +19,23 @@
 
 + config(配置中心)4001：使用 SpringCloud Config 作为配置中心。
 
-### 二、Spring Cloud
-+ Spring Cloud Config：配置管理中心
-+ ✔️Spring Cloud Netflix Eureka：注册中心
-+ Spring Cloud Netflix Ribbon：客户端负载均衡
-+ Spring Cloud Netflix Hystrix：熔断器
-+ Spring Cloud Netflix Zuul：服务网关
-+ Spring Cloud Security + OAuth2：安全认证
-+ Spring Cloud Stream + Kafka ：消息驱动
-+ Spring Cloud Sleuth + Zipkin：服务链路追踪
+### 二、Spring Cloud Netflix
+#### Spring Cloud Config（配置中心）
+
+#### ✔️Spring Cloud Netflix Eureka（注册中心）
++ 当服务通过Eureka注册时，Eureka将在30s内等待3次健康检查，然后才能通过Eureka获取该服务。
+
+#### Spring Cloud Netflix Ribbon（客户端负载均衡）
+
+#### Spring Cloud Netflix Hystrix（熔断器）
+
+#### Spring Cloud Netflix Zuul（服务网关）
+
+#### Spring Cloud Security + OAuth2（安全认证）
+
+#### Spring Cloud Stream + Kafka（消息驱动）
+
+#### Spring Cloud Sleuth + Zipkin（服务链路追踪）
 
 ### 三、Spring 
 #### Spring Bean 生命周期
