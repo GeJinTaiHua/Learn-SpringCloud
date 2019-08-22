@@ -6,8 +6,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.AdvisedSupport;
@@ -16,7 +14,6 @@ import org.springframework.aop.support.AopUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
-import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -25,9 +22,6 @@ import java.lang.reflect.Method;
 public class RepeatAspect {
 
     private static Logger log = LoggerFactory.getLogger(RepeatAspect.class);
-
-    @Resource(name = "appRedissonClient")
-    private RedissonClient redissonClient;
 
     @Pointcut("execution(public * com.customer1.controller.*.*.*(..))")
     public void repeatPointcut() {
@@ -73,36 +67,7 @@ public class RepeatAspect {
             }
         }
 
-        //生成请求token
-        String requestToken = methodName + ":" + hashSignature(methodName, args);
-
-        if (log.isInfoEnabled()) {
-            log.info("请求方法【{}】,生成请求token【{}】", methodName, requestToken);
-        }
-
-        //加锁
-        RLock lock = redissonClient.getLock(requestToken);
-
-        try {
-            if (!lock.tryLock()) {
-                throw new RepeatException("重复请求，加锁失败！");
-            }
-        } catch (RepeatException e) {
-            throw e;
-        } catch (Throwable e) {
-            log.error("加锁失败!", e);
-            throw e;
-        }
-
-
-        try {
-            return pjp.proceed();
-        } catch (Throwable e) {
-            log.error("加锁后,执行方法【" + methodName + "】出错！", e);
-            throw e;
-        } finally {
-            lock.unlock();
-        }
+        return pjp.proceed();
     }
 
     /**

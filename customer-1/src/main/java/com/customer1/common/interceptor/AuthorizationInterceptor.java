@@ -6,11 +6,8 @@ import com.basic.domain.HttpResult;
 import com.customer1.common.annotation.IgnoreToken;
 import com.customer1.common.constants.ResultCodeConstants;
 import com.customer1.common.context.UserContext;
-import com.customer1.domain.UserInfo;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.redisson.api.RBucket;
-import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -19,7 +16,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
@@ -30,9 +26,6 @@ import java.util.*;
 @Component
 public class AuthorizationInterceptor implements HandlerInterceptor {
     private Logger log = LoggerFactory.getLogger(AuthorizationInterceptor.class);
-
-    @Resource(name = "appRedissonClient")
-    private RedissonClient redissonClient;
 
     /**
      * 存放鉴权信息的Header名称，默认是Authorization
@@ -66,35 +59,9 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
                 return false;
             }
 
-            /**
-             * 1.根据token获取用户信息
-             * 2.没有用户信息，判断用户手机号码是否存在，存在代表在别的设备上登录，不存在，重新登录
-             */
-            RBucket<String> rbucket = redissonClient.getBucket(token);
-            String jsonStr = Optional.ofNullable(rbucket).map(e -> e.get()).orElse(null);
-            if (StringUtils.isEmpty(jsonStr)) {
-                String phoneKey = token.substring(0, token.lastIndexOf("_"));
-                phoneKey = phoneKey + "*";
-                if (redissonClient.getKeys().getKeysByPattern(phoneKey).iterator().hasNext()) {
-                    printMess(response, HttpResult.failResult("您的账号在其他设备登录，请确认是本人操作!", ResultCodeConstants.RESULT_CODE_FAIL));
-                    return false;
-                }
-                printMess(response, HttpResult.failResult("token无效！", ResultCodeConstants.RESULT_CODE_FAIL));
-                return false;
-            }
-
-            try {
-                // 保存用户上下文信息
-                UserContext.set(JSON.parseObject(jsonStr, UserInfo.class));
-                log.info("当前token:[{}],用户信息:[{}]", token, jsonStr);
-            } catch (Exception e) {
-                log.error("获取用户信息时出现错误！", e);
-                printMess(response, HttpResult.failResult("获取用户信息时出现错误！", ResultCodeConstants.RESULT_CODE_FAIL));
-                return false;
-            }
+            //处理token
+            return true;
         }
-
-        return false;
     }
 
     @Override
