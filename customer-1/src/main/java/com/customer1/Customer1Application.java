@@ -4,12 +4,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * start application
  **/
+@RefreshScope // 配置中心动态刷新
 @EnableFeignClients(basePackages = {"com.basic.api"})// 启用feign客户端
 @EnableAspectJAutoProxy() // 开启AOP
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class}) // 引导类，排除掉DB
