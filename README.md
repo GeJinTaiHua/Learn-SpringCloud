@@ -1,4 +1,4 @@
-# ☕️SpringCloud learning
+# ☕️SpringCloud Netflix learning
 
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.1.3-brightgreen.svg)
 ![build passing](https://img.shields.io/badge/build-passing-brightgreen.svg)
