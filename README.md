@@ -21,9 +21,9 @@
 
 ### Spring Cloud
 + Spring Cloud Config：配置管理中心
-+ ✔️Spring Cloud Rureka：注册中心
-+ Spring Cloud Hystrix：熔断器
-+ Spring Cloud Zuul：服务网关
++ ✔️Spring Cloud Netflix Eureka：注册中心
++ Spring Cloud Netflix Hystrix：熔断器
++ Spring Cloud Netflix Zuul：服务网关
 + Spring Cloud Security + OAuth2：安全认证
 + Spring Cloud Stream + Kafka ：消息驱动
 + Spring Cloud Sleuth + Zipkin：服务链路追踪
