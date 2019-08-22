@@ -28,4 +28,11 @@ public class EurekaController {
         String result = eurekaService.restTest();
         return result;
     }
+
+    @ApiOperation(value = "Feign示例")
+    @RequestMapping(value = "/feignTest", method = RequestMethod.POST)
+    public String feignTest() {
+        String result = eurekaService.feignTest();
+        return result;
+    }
 }

@@ -22,4 +22,9 @@ public class Demo1ServiceImpl implements DemoService {
         result.setAge(age);
         return result;
     }
+
+    @Override
+    public String feignTest() {
+        return "feignTest 成功";
+    }
 }

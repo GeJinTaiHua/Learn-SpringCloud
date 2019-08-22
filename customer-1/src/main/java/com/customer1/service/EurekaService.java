@@ -4,4 +4,6 @@ public interface EurekaService {
     String discoverTest();
 
     String restTest();
+
+    String feignTest();
 }

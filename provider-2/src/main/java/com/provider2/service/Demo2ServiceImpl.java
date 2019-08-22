@@ -16,4 +16,9 @@ public class Demo2ServiceImpl implements DemoService {
         result.setAge(20);
         return result;
     }
+
+    @Override
+    public String feignTest() {
+        return "feignTest 成功";
+    }
 }

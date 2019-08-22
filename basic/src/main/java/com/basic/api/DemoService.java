@@ -13,4 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface DemoService {
     @PostMapping("/fegin/test/getDemo")
     DemoVO getDemoVo(@RequestBody DemoDTO demoDTO);
+
+    @PostMapping("/feignTest")
+    String feignTest();
 }
