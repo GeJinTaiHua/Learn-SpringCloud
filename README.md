@@ -24,6 +24,10 @@
 
 #### ✔️Spring Cloud Netflix Eureka（注册中心）
 + 当服务通过Eureka注册时，Eureka将在30s内等待3次健康检查，然后才能通过Eureka获取该服务。
++ Client客户端选择：
+  + Discover
+  + Rest
+  + Feigh
 
 #### Spring Cloud Netflix Ribbon（客户端负载均衡）
 

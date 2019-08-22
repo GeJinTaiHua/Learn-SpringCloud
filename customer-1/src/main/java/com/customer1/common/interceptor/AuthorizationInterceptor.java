@@ -53,11 +53,11 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
         if (method.getAnnotation(IgnoreToken.class) != null || handlerMethod.getBeanType().getAnnotation(IgnoreToken.class) != null) {
             return true;
         } else {
-            String token = request.getHeader(httpHeaderName);
-            if (!StringUtils.isNotBlank(token)) {
-                printMess(response, HttpResult.failResult("token不能为空！", ResultCodeConstants.RESULT_CODE_FAIL));
-                return false;
-            }
+//            String token = request.getHeader(httpHeaderName);
+//            if (!StringUtils.isNotBlank(token)) {
+//                printMess(response, HttpResult.failResult("token不能为空！", ResultCodeConstants.RESULT_CODE_FAIL));
+//                return false;
+//            }
 
             //处理token
             return true;

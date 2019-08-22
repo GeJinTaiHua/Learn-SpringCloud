@@ -1,13 +1,13 @@
 package com.customer1.controller;
 
-import com.customer1.common.annotation.IgnoreToken;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@IgnoreToken
+@Api("配置中心示例")
 @RestController
 @RequestMapping(value = "/config")
 public class ConfigController extends AppBaseController {
