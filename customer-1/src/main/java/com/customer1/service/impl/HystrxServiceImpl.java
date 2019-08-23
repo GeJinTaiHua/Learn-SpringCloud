@@ -36,6 +36,8 @@ public class HystrxServiceImpl implements HystrxService {
     @HystrixCommand(fallbackMethod = "hystrixTest3_fallbacke")
     @Override
     public String hystrixTest3() {
+        int i = 1, j = 0;
+        i = i / j;// 异常
         return "String hystrixTest3() 成功";
     }
 
@@ -52,17 +54,32 @@ public class HystrxServiceImpl implements HystrxService {
             threadPoolProperties = {
                     @HystrixProperty(name = "coreSize", value = "30"),// 线程池大小
                     @HystrixProperty(name = "maxQueueSize", value = "10")// 线程池等待队列大小，超过数目的请求将失败
-            },
-            commandProperties = {
-                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
-                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "75"),
-                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "7000"),
-                    @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "15000"),
-                    @HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "5")
             }
     )
     @Override
     public String hystrixTest4() {
         return "String hystrixTest4() 成功";
+    }
+
+    /**
+     * 详细
+     */
+    @HystrixCommand(
+            threadPoolKey = "hystrixTest4ThreadPool",
+            threadPoolProperties = {
+                    @HystrixProperty(name = "coreSize", value = "30"),
+                    @HystrixProperty(name = "maxQueueSize", value = "10")
+            },
+            commandProperties = {
+                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),// 跳闸前，在10s内必须发生的连续调用数量
+                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "75"),// 失败百分比阈值，超过就跳闸
+                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "7000"),// 跳闸后，另一个调用通过以便查看服务是否恢复健康之前的休眠时间
+                    @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "15000"),// 用来监视服务调用问题的窗口大小
+                    @HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "5")// 在定义的滚动窗口中收集统计信息的次数
+            }
+    )
+    @Override
+    public String hystrixTest5() {
+        return "String hystrixTest5() 成功";
     }
 }

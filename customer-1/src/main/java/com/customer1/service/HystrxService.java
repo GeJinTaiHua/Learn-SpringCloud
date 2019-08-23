@@ -8,4 +8,6 @@ public interface HystrxService {
     String hystrixTest3();
 
     String hystrixTest4();
+
+    String hystrixTest5();
 }
