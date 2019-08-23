@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api("注册中心示例")
 @RestController
 @RequestMapping(value = "/eureka")
-public class EurekaController {
+public class EurekaController extends AppBaseController {
     @Autowired
     private EurekaService eurekaService;
 

@@ -32,6 +32,11 @@
 #### ✔️Spring Cloud Netflix Ribbon（客户端负载均衡）
 
 #### Spring Cloud Netflix Hystrix（熔断器）
++ 4种客户端弹性模式
+  + 客户端负载均衡模式
+  + 断路器模式 
+  + 后备模式
+  + 舱壁模式
 
 #### Spring Cloud Netflix Zuul（服务网关）
 
