@@ -26,14 +26,21 @@ public class Swagger {
 
     @Bean
     public Docket createRestApi() {
+        List<Parameter> parameters = new ArrayList<>();
+
         ParameterBuilder parameterBuilder = new ParameterBuilder();
-        parameterBuilder.name("AuthorToken").description("AuthorToken")
+        parameterBuilder.name("tmx-auth-token").description("tmx-auth-token")
                 .modelRef(new ModelRef("string")).parameterType("header")
                 .defaultValue("token_demo_dev_13600")
                 .required(false).build();
-
-        List<Parameter> parameters = new ArrayList<>();
         parameters.add(parameterBuilder.build());
+
+        ParameterBuilder parameterBuilder2 = new ParameterBuilder();
+        parameterBuilder2.name("tmx-user-id").description("tmx-user-id")
+                .modelRef(new ModelRef("string")).parameterType("header")
+                .defaultValue("t112dfa45545155151")
+                .required(false).build();
+        parameters.add(parameterBuilder2.build());
 
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())

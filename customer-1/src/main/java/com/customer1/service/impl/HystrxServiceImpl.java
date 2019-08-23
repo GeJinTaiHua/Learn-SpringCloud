@@ -1,7 +1,7 @@
 package com.customer1.service.impl;
 
-import com.customer1.common.context.UserContext;
-import com.customer1.domain.UserInfo;
+import com.customer1.common.filter.UserContext;
+import com.customer1.common.filter.UserContextHolder;
 import com.customer1.service.HystrxService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
@@ -38,9 +38,9 @@ public class HystrxServiceImpl implements HystrxService {
     @HystrixCommand(fallbackMethod = "hystrixTest3_fallbacke")
     @Override
     public String hystrixTest3() {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUserUuid("11111");
-        UserContext.set(userInfo);
+        UserContext userInfo = new UserContext();
+        userInfo.setUserId("11111");
+        UserContextHolder.setContext(userInfo);
 
         // 异常
         int i = 1, j = 0;
@@ -52,7 +52,7 @@ public class HystrxServiceImpl implements HystrxService {
      * Hystrix默认thread模式，以独立与福线程的另一个线程运行，无法使用上下文！
      */
     private String hystrixTest3_fallbacke() {
-        String userUuid = UserContext.get().getUserUuid();
+        String userUuid = UserContextHolder.getContext().getUserId();
         return "hystrixTest3_fallbacke" + userUuid;
     }
 

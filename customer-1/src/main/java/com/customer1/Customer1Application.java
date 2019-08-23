@@ -1,5 +1,6 @@
 package com.customer1;
 
+import com.customer1.common.filter.UserContextInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -11,6 +12,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Collections;
+import java.util.List;
 
 @RefreshScope // 配置中心动态刷新
 @EnableDiscoveryClient // 激活Discovery客户端
@@ -25,7 +29,16 @@ public class Customer1Application {
     @Bean
     @LoadBalanced // 告诉springcloud创建一个支持ribbon的RestTemplate类
     public RestTemplate getRestTemplate() {
-        return new RestTemplate();
+        RestTemplate template = new RestTemplate();
+        List interceptors = template.getInterceptors();
+        if (interceptors == null) {
+            template.setInterceptors(Collections.singletonList(new UserContextInterceptor()));
+        } else {
+            interceptors.add(new UserContextInterceptor());
+            template.setInterceptors(interceptors);
+        }
+
+        return template;
     }
 
     public static void main(String[] args) {
