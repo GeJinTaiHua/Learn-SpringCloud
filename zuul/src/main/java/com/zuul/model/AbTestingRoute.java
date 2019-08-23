@@ -1,7 +1,7 @@
 package com.zuul.model;
 
 /**
- * 测试model
+ * AB测试model
  */
 public class AbTestingRoute {
     String serviceName;

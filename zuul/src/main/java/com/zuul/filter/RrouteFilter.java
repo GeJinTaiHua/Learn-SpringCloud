@@ -34,7 +34,6 @@
 //import java.net.URL;
 //import java.util.ArrayList;
 //import java.util.List;
-//import java.util.Map;
 //import java.util.Random;
 //
 ///**
@@ -64,39 +63,115 @@
 //        return true;
 //    }
 //
-//    private ProxyRequestHelper helper = new ProxyRequestHelper();
+//    /**
+//     * A/B测试
+//     * 部分路由转到B服务
+//     */
+//    @Override
+//    public Object run() {
+//        // 查看路由记录是否存在
+//        AbTestingRoute abTestRoute = getAbRoutingInfo(filterUtils.getServiceId());
 //
+//        if (abTestRoute != null && useSpecialRoute(abTestRoute)) {
+//            // 将完整url构建到B服务
+//            RequestContext ctx = RequestContext.getCurrentContext();
+//            String route = buildRouteString(ctx.getRequest().getRequestURI(),
+//                    abTestRoute.getEndpoint(),
+//                    ctx.get("serviceId").toString());
+//            // 转发到其他服务
+//            forwardToSpecialRoute(route);
+//        }
+//
+//        return null;
+//    }
+//
+//    /**
+//     * 调用B服务查看路由记录是否存在
+//     */
 //    private AbTestingRoute getAbRoutingInfo(String serviceName) {
 //        ResponseEntity<AbTestingRoute> restExchange = null;
 //        try {
 //            restExchange = restTemplate.exchange(
-//                    "http://specialroutesservice/v1/route/abtesting/{serviceName}",
+//                    "http://B/v1/{serviceName}",
 //                    HttpMethod.GET,
 //                    null, AbTestingRoute.class, serviceName);
 //        } catch (HttpClientErrorException ex) {
-//            if (ex.getStatusCode() == HttpStatus.NOT_FOUND) return null;
+//            if (ex.getStatusCode() == HttpStatus.NOT_FOUND) {
+//                return null;
+//            }
 //            throw ex;
 //        }
 //        return restExchange.getBody();
 //    }
 //
+//    /**
+//     * 是否将请求转发到替代服务
+//     */
+//    private boolean useSpecialRoute(AbTestingRoute testRoute) {
+//        Random random = new Random();
+//
+//        // 检查路由是否活跃
+//        if (testRoute.getActive().equals("N")) {
+//            return false;
+//        }
+//
+//        int value = random.nextInt((10 - 1) + 1) + 1;
+//        if (testRoute.getWeight() < value) {
+//            return true;
+//        }
+//
+//        return false;
+//    }
+//
 //    private String buildRouteString(String oldEndpoint, String newEndpoint, String serviceName) {
 //        int index = oldEndpoint.indexOf(serviceName);
-//
 //        String strippedRoute = oldEndpoint.substring(index + serviceName.length());
 //        System.out.println("Target route: " + String.format("%s/%s", newEndpoint, strippedRoute));
 //        return String.format("%s/%s", newEndpoint, strippedRoute);
 //    }
 //
-//    private String getVerb(HttpServletRequest request) {
-//        String sMethod = request.getMethod();
-//        return sMethod.toUpperCase();
-//    }
+//    /**
+//     * 用于代理服务请求的辅助方法
+//     */
+//    private ProxyRequestHelper helper = new ProxyRequestHelper();
 //
-//    private HttpHost getHttpHost(URL host) {
-//        HttpHost httpHost = new HttpHost(host.getHost(), host.getPort(),
-//                host.getProtocol());
-//        return httpHost;
+//    /**
+//     * 调用替代服务
+//     */
+//    private void forwardToSpecialRoute(String route) {
+//        RequestContext context = RequestContext.getCurrentContext();
+//        HttpServletRequest request = context.getRequest();
+//
+//        // 创建将发送到服务的所有HTTP请求首部的副本
+//        MultiValueMap<String, String> headers = this.helper.buildZuulRequestHeaders(request);
+//        // 创建所有HTTP请求参数的副本
+//        MultiValueMap<String, String> params = this.helper.buildZuulRequestQueryParams(request);
+//        // 创建将被转发到替代服务的HTTP主体的副本
+//        InputStream requestEntity = getRequestBody(request);
+//
+//        if (request.getContentLength() < 0) {
+//            context.setChunkedRequestBody();
+//        }
+//
+//        this.helper.addIgnoredHeaders();
+//
+//        CloseableHttpClient httpClient = null;
+//        try {
+//            httpClient = HttpClients.createDefault();
+//            HttpResponse response = forward(httpClient, request.getMethod().toUpperCase(), route, request, headers,
+//                    params, requestEntity);
+//
+//            this.helper.setResponse(response.getStatusLine().getStatusCode(),
+//                    response.getEntity() == null ? null : response.getEntity().getContent(),
+//                    revertHeaders(response.getAllHeaders()));
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        } finally {
+//            try {
+//                httpClient.close();
+//            } catch (IOException ex) {
+//            }
+//        }
 //    }
 //
 //    private Header[] convertHeaders(MultiValueMap<String, String> headers) {
@@ -109,11 +184,15 @@
 //        return list.toArray(new BasicHeader[0]);
 //    }
 //
-//    private HttpResponse forwardRequest(HttpClient httpclient, HttpHost httpHost,
-//                                        HttpRequest httpRequest) throws IOException {
-//        return httpclient.execute(httpHost, httpRequest);
+//    private InputStream getRequestBody(HttpServletRequest request) {
+//        InputStream requestEntity = null;
+//        try {
+//            requestEntity = request.getInputStream();
+//        } catch (IOException ex) {
+//            // no requestBody is ok.
+//        }
+//        return requestEntity;
 //    }
-//
 //
 //    private MultiValueMap<String, String> revertHeaders(Header[] headers) {
 //        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
@@ -127,36 +206,20 @@
 //        return map;
 //    }
 //
-//    private InputStream getRequestBody(HttpServletRequest request) {
-//        InputStream requestEntity = null;
-//        try {
-//            requestEntity = request.getInputStream();
-//        } catch (IOException ex) {
-//            // no requestBody is ok.
-//        }
-//        return requestEntity;
-//    }
-//
-//    private void setResponse(HttpResponse response) throws IOException {
-//        this.helper.setResponse(response.getStatusLine().getStatusCode(),
-//                response.getEntity() == null ? null : response.getEntity().getContent(),
-//                revertHeaders(response.getAllHeaders()));
-//    }
-//
+//    /**
+//     * 实际调用服务
+//     */
 //    private HttpResponse forward(HttpClient httpclient, String verb, String uri,
 //                                 HttpServletRequest request, MultiValueMap<String, String> headers,
-//                                 MultiValueMap<String, String> params, InputStream requestEntity)
-//            throws Exception {
-//        Map<String, Object> info = this.helper.debug(verb, uri, headers, params,
-//                requestEntity);
+//                                 MultiValueMap<String, String> params, InputStream requestEntity) throws Exception {
 //        URL host = new URL(uri);
-//        HttpHost httpHost = getHttpHost(host);
+//        HttpHost httpHost = new HttpHost(host.getHost(), host.getPort(), host.getProtocol());
 //
 //        HttpRequest httpRequest;
 //        int contentLength = request.getContentLength();
 //        InputStreamEntity entity = new InputStreamEntity(requestEntity, contentLength,
-//                request.getContentType() != null
-//                        ? ContentType.create(request.getContentType()) : null);
+//                request.getContentType() != null ? ContentType.create(request.getContentType()) : null);
+//
 //        switch (verb.toUpperCase()) {
 //            case "POST":
 //                HttpPost httpPost = new HttpPost(uri);
@@ -175,77 +238,13 @@
 //                break;
 //            default:
 //                httpRequest = new BasicHttpRequest(verb, uri);
-//
 //        }
+//
 //        try {
 //            httpRequest.setHeaders(convertHeaders(headers));
-//            HttpResponse zuulResponse = forwardRequest(httpclient, httpHost, httpRequest);
-//
+//            HttpResponse zuulResponse = httpclient.execute(httpHost, httpRequest);
 //            return zuulResponse;
 //        } finally {
-//        }
-//    }
-//
-//
-//    public boolean useSpecialRoute(AbTestingRoute testRoute) {
-//        Random random = new Random();
-//
-//        if (testRoute.getActive().equals("N")) return false;
-//
-//        int value = random.nextInt((10 - 1) + 1) + 1;
-//
-//        if (testRoute.getWeight() < value) return true;
-//
-//        return false;
-//    }
-//
-//    @Override
-//    public Object run() {
-//        RequestContext ctx = RequestContext.getCurrentContext();
-//
-//        AbTestingRoute abTestRoute = getAbRoutingInfo(filterUtils.getServiceId());
-//
-//        if (abTestRoute != null && useSpecialRoute(abTestRoute)) {
-//            String route = buildRouteString(ctx.getRequest().getRequestURI(),
-//                    abTestRoute.getEndpoint(),
-//                    ctx.get("serviceId").toString());
-//            forwardToSpecialRoute(route);
-//        }
-//
-//        return null;
-//    }
-//
-//    private void forwardToSpecialRoute(String route) {
-//        RequestContext context = RequestContext.getCurrentContext();
-//        HttpServletRequest request = context.getRequest();
-//
-//        MultiValueMap<String, String> headers = this.helper
-//                .buildZuulRequestHeaders(request);
-//        MultiValueMap<String, String> params = this.helper
-//                .buildZuulRequestQueryParams(request);
-//        String verb = getVerb(request);
-//        InputStream requestEntity = getRequestBody(request);
-//        if (request.getContentLength() < 0) {
-//            context.setChunkedRequestBody();
-//        }
-//
-//        this.helper.addIgnoredHeaders();
-//        CloseableHttpClient httpClient = null;
-//        HttpResponse response = null;
-//
-//        try {
-//            httpClient = HttpClients.createDefault();
-//            response = forward(httpClient, verb, route, request, headers,
-//                    params, requestEntity);
-//            setResponse(response);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//
-//        } finally {
-//            try {
-//                httpClient.close();
-//            } catch (IOException ex) {
-//            }
 //        }
 //    }
 //}
