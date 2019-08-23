@@ -15,6 +15,7 @@
         <module>provider-2</module>
         <module>register</module>
         <module>config</module>
+        <module>zuul</module>
     </modules>
 
     <parent>

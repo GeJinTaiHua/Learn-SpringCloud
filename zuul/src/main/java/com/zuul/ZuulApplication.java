@@ -1,17 +1,17 @@
-package com.register;
+package com.zuul;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 /**
  * start application
  **/
-@EnableConfigServer // 开启配置中心服务端支持
+@EnableZuulProxy // 使服务成为一个Zuul服务器
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-public class ConfigApplication {
+public class ZuulApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ConfigApplication.class, args);
+        SpringApplication.run(ZuulApplication.class, args);
     }
 }

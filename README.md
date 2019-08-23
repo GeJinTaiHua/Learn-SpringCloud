@@ -19,6 +19,13 @@
 
 + config(配置中心)4001：使用 SpringCloud Config 作为配置中心。
 
++ zuul(服务网关)5001
+  + http://localhost:5001/actuator/routes
+  ![](/basic/pic/ZuulRoutes.png)
+  + 反向代理消费者
+    + http://localhost:5001/customer-1/api/app/swagger-ui.html
+    + http://localhost:5001/c1/api/app/demo/getDemo/1
+
 ### 二、Spring Cloud Netflix
 #### ✔️Spring Cloud Config（配置中心）
 
@@ -29,9 +36,9 @@
   + Rest
   + Feigh
 
-#### ✔️Spring Cloud Netflix Ribbon（客户端负载均衡）
+#### Spring Cloud Netflix Ribbon（客户端负载均衡）
 
-#### Spring Cloud Netflix Hystrix（熔断器）
+####  ✔️Spring Cloud Netflix Hystrix（熔断器）
 + 4种客户端弹性模式
   + 客户端负载均衡模式
   + 断路器模式 
@@ -45,7 +52,12 @@
   + semaphore 
     + 不使用单独的线程；
 
-#### Spring Cloud Netflix Zuul（服务网关）
+####  ✔️Spring Cloud Netflix Zuul（服务网关）
++ 核心：反向代理
++ 3中映射路由方式：
+  + 通过服务发现自动映射路由；
+  + 使用服务发现手动映射路由；
+  + 使用静态URL手动映射路由。
 
 #### Spring Cloud Security + OAuth2（安全认证）
 
