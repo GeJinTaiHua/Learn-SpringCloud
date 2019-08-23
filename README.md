@@ -37,6 +37,13 @@
   + 断路器模式 
   + 后备模式
   + 舱壁模式
+  
++ 2种隔离模式
+  + thread（默认）
+    + 不会将父线程的上下文传递到Hystrix管理的线程；
+    + 通过自定义HystrixConcurrencystrategy实现上下文传递；
+  + semaphore 
+    + 不使用单独的线程；
 
 #### Spring Cloud Netflix Zuul（服务网关）
 
