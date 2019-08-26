@@ -40,9 +40,9 @@
   + Rest
   + Feigh
 
-#### Spring Cloud Netflix Ribbon（客户端负载均衡）
+#### ✔️Spring Cloud Netflix Ribbon（客户端负载均衡）
 
-####  ✔️Spring Cloud Netflix Hystrix（熔断器）
+#### ✔️Spring Cloud Netflix Hystrix（熔断器）
 + 4种客户端弹性模式
   + 客户端负载均衡模式
   + 断路器模式 
@@ -73,7 +73,7 @@
 
 #### ✔️Spring Cloud Security + OAuth2（安全认证）
 
-#### ✔️Spring Cloud Stream + Kafka（消息驱动）
+#### Spring Cloud Stream + Kafka（消息驱动）
 + 4个组件：
   + 发射器
   + 通道
