@@ -13,7 +13,7 @@
     <version>1.0.0</version>
 
     <dependencies>
-        <!--验证-->
+        <!--OAuth2-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-security</artifactId>

@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 import java.util.List;
 
+//@EnableResourceServer // 受OAuth保护的资源
 @RefreshScope // 配置中心动态刷新
 @EnableDiscoveryClient // 激活Discovery客户端
 @EnableFeignClients(basePackages = {"com.basic.api"})// 激活feign客户端
