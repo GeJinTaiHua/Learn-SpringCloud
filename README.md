@@ -26,6 +26,8 @@
     + http://localhost:5001/customer-1/api/app/swagger-ui.html
     + http://localhost:5001/c1/api/app/demo/getDemo/1
 
++ oauth2(授权)6001
+
 ### 二、Spring Cloud Netflix
 #### ✔️Spring Cloud Config（配置中心）
 

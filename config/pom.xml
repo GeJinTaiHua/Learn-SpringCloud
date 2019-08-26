@@ -13,12 +13,6 @@
     <version>1.0.0</version>
 
     <dependencies>
-        <dependency>
-            <groupId>com.xiaolong.demo</groupId>
-            <artifactId>basic</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
         <!--SpringCloud Config-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

@@ -16,6 +16,7 @@
         <module>register</module>
         <module>config</module>
         <module>zuul</module>
+        <module>oauth2</module>
     </modules>
 
     <parent>
