@@ -6,27 +6,27 @@
 ### 一、项目结构
 + basic（公用）：定义公用接口、公用类；
 
-+ register(注册中心)1001：使用 SpringCloud Eureka 作为注册中心。
++ register（注册中心）1001：使用 SpringCloud Eureka 作为注册中心。
   + http://localhost:1001/  
   ![](/basic/pic/eureka1001.png)
   
-+ provider-1(生产者)2001
-+ provider-2(生产者)2002  
++ provider-1（生产者）2001
++ provider-2（生产者）2002  
 
-+ customer-1(消费者)3001
++ customer-1（消费者）3001
   + http://localhost:3001/api/app/swagger-ui.html  
   ![](/basic/pic/swagger3001.png)
 
-+ config(配置中心)4001：使用 SpringCloud Config 作为配置中心。
++ config（配置中心）4001：使用 SpringCloud Config 作为配置中心。
 
-+ zuul(服务网关)5001
++ zuul（服务网关）5001
   + http://localhost:5001/actuator/routes  
   ![](/basic/pic/ZuulRoutes.png)
   + 反向代理消费者
     + http://localhost:5001/customer-1/api/app/swagger-ui.html
     + http://localhost:5001/c1/api/app/demo/getDemo/1
 
-+ oauth2(授权)6001：待定  
++ oauth2（认证授权）6001：待定  
   ![](/basic/pic/oauth2.1.png)   
   ![](/basic/pic/oauth2.2.png)  
 
@@ -51,8 +51,8 @@
   
 + 2种隔离模式
   + thread（默认）
-    + 不会将父线程的上下文传递到Hystrix管理的线程；
-    + 通过自定义HystrixConcurrencystrategy实现上下文传递；
+    + 不会将父线程的上下文传递到 Hystrix 管理的线程；
+    + 通过自定义 HystrixConcurrencystrategy 实现上下文传递；
   + semaphore 
     + 不使用单独的线程；
 
@@ -68,10 +68,10 @@
   + 后置过滤器：记录返回信息
   
 + 作用：
-  + （核心）反向代理
+  + 反向代理（核心）
   + 横切关注点：安全性、日志记录、服务追踪
 
-#### Spring Cloud Security + OAuth2（安全认证）
+#### ✔️Spring Cloud Security + OAuth2（安全认证）
 
 #### Spring Cloud Stream + Kafka（消息驱动）
 
@@ -80,9 +80,9 @@
 ### 三、Spring 
 #### Spring Bean 生命周期
 ![bean](/basic/pic/springBean.png)
-1. 实例化Bean对象
+1. 实例化 Bean 对象
 2. 设置对象属性（依赖注入）
-3. 处理Aware接口
+3. 处理 Aware接口
    + BeanNameAware接口：setBeanName()
    + BeanFactoryAware接口：setBeanFactory()
    + ApplicationContextAware接口：setApplicationContext()
@@ -91,7 +91,7 @@
    + 后置处理器：postProcessAfterInitialization接口
 5. InitializingBean接口、init-method声明
    + afterPropertiesSet()
-6. 使用Bean
+6. 使用 Bean
 7. DisposableBean接口、destroy-method声明
    + destory()
 
@@ -103,7 +103,7 @@
 + global-session：同session作用域不同的是，所有的Session共享一个Bean实例。
 
 #### Bean 条件化
-+ Profile Bean：使用@Profile注解指定某个bean属于哪一个profile。在应用部署到相应的环境中时，只要确保相应的profile处于激活状态就可以执行相关的bean。
++ Profile Bean：使用 @Profile 注解指定某个 bean 属于哪一个 profile。在应用部署到相应的环境中时，只要确保相应的 profile 处于激活状态就可以执行相关的 bean。
 ```
 @Bean
 @Profile("dev") //开发环境使用这个bean，通过嵌入式数据库获得DataSource
