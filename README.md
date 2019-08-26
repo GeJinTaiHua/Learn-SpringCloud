@@ -73,7 +73,12 @@
 
 #### ✔️Spring Cloud Security + OAuth2（安全认证）
 
-#### Spring Cloud Stream + Kafka（消息驱动）
+#### ✔️Spring Cloud Stream + Kafka（消息驱动）
++ 4个组件：
+  + 发射器
+  + 通道
+  + 绑定器
+  + 接收器
 
 #### Spring Cloud Sleuth + Zipkin（服务链路追踪）
 
