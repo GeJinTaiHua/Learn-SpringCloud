@@ -26,7 +26,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("xiaolong-1") // 注册的应用程序名称
+                .withClient("xl") // 注册的应用程序名称
                 .secret("abc") // 密钥
                 .authorizedGrantTypes("refresh_token", "password", "client_credentials") // 授权类型列表
                 .scopes("webclient", "mobileclient"); // 获取令牌时的可操作范围
