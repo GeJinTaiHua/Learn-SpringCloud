@@ -8,31 +8,31 @@
 
 + register（注册中心）1001：使用 SpringCloud Eureka 作为注册中心。
   + http://localhost:1001/  
-  ![](/basic/pic/eureka1001.png)
+  ![](/register/pic/eureka.png)
   
 + provider-1（生产者）2001
 + provider-2（生产者）2002  
 
 + customer-1（消费者）3001
   + http://localhost:3001/api/app/swagger-ui.html  
-  ![](/basic/pic/swagger3001.png)
+  ![](/customer-1/pic/swagger.png)
 
 + config（配置中心）4001：使用 SpringCloud Config 作为配置中心。
 
 + zuul（服务网关）5001
   + http://localhost:5001/actuator/routes  
-  ![](/basic/pic/ZuulRoutes.png)
+  ![](/zuul/pic/zuul.png)
   + 反向代理消费者
     + http://localhost:5001/customer-1/api/app/swagger-ui.html
     + http://localhost:5001/c1/api/app/demo/getDemo/1
 
-+ oauth2（认证授权）6001：待定  
-  ![](/basic/pic/oauth2.1.png)   
-  ![](/basic/pic/oauth2.2.png)  
++ oauth2（认证授权）6001：待实现
+  ![](/oauth2/pic/oauth2.1.png)   
+  ![](/oauth2/pic/oauth2.2.png)  
   
 + zipkin（链路跟踪）7001
   + http://localhost:7001/zipkin/  
-  ![](/basic/pic/zipkin.png)
+  ![](/zipkin/pic/zipkin.png)
 
 ### 二、Spring Cloud Netflix
 #### ✔️Spring Cloud Config（配置中心）
