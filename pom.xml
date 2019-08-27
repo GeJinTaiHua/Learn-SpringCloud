@@ -13,7 +13,7 @@
         <module>customer-1</module>
         <module>provider-1</module>
         <module>provider-2</module>
-        <module>register</module>
+        <module>eureka</module>
         <module>config</module>
         <module>zuul</module>
         <module>oauth2</module>
