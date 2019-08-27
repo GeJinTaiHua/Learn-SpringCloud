@@ -17,6 +17,7 @@
         <module>config</module>
         <module>zuul</module>
         <module>oauth2</module>
+        <module>zipkin</module>
     </modules>
 
     <parent>

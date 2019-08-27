@@ -29,6 +29,10 @@
 + oauth2（认证授权）6001：待定  
   ![](/basic/pic/oauth2.1.png)   
   ![](/basic/pic/oauth2.2.png)  
+  
++ zipkin（链路跟踪）7001
+  + http://localhost:7001/zipkin/  
+  ![](/basic/pic/zipkin.png)
 
 ### 二、Spring Cloud Netflix
 #### ✔️Spring Cloud Config（配置中心）
@@ -80,7 +84,7 @@
   + 绑定器
   + 接收器
 
-#### Spring Cloud Sleuth + Zipkin（服务链路追踪）
+#### ✔️Spring Cloud Sleuth + Zipkin（服务链路追踪）
 
 ### 三、Spring 
 #### Spring Bean 生命周期
