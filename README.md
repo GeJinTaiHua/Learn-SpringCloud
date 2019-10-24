@@ -177,32 +177,27 @@ public class MagicExistsCondition implements Condition{
   + 新建了调用对象；
   + unchecked、捕获异常；
 
-#### JSON协议
-+ 轻量级，传递数据没有太大的文本开销；
-+ 易于人们的阅读和消费；
-+ 是JavaScript使用的默认序列化协议；
-
-### 四、Spring Security OAuth2 
-#### 存储token值的方式
-+ InMemoryTokenStore：存储在本机的内存之中；
-+ JdbcTokenStore：存储在数据库之中；
-+ JwtTokenStore：不会存储到任何介质中；
-+ RedisTokenStore：存储在Redis数据库之中；
-  + access_token
-  ```
-  private static final String ACCESS = "access:";//OAuth2AccessToken
-  private static final String AUTH_TO_ACCESS = "auth_to_access:";//OAuth2AccessToken
-  private static final String AUTH = "auth:";//OAuth2Authentication
-  private static final String CLIENT_ID_TO_ACCESS = "client_id_to_access:";//OAuth2AccessToken
-  private static final String UNAME_TO_ACCESS = "uname_to_access:";//OAuth2AccessToken
-  ```
-  + refresh_token
-  ```
-  private static final String REFRESH_AUTH = "refresh_auth:";//OAuth2Authentication
-  private static final String ACCESS_TO_REFRESH = "access_to_refresh:";//refresh_token
-  private static final String REFRESH = "refresh:";//OAuth2RefreshToken
-  private static final String REFRESH_TO_ACCESS = "refresh_to_access:";//refresh_token
-  ```
+#### Spring Security OAuth2 
++ 存储token值的方式
+  1. InMemoryTokenStore：存储在本机的内存之中；
+  2. JdbcTokenStore：存储在数据库之中；
+  3. JwtTokenStore：不会存储到任何介质中；
+  4. RedisTokenStore：存储在Redis数据库之中；
+      + access_token
+      ```
+      private static final String ACCESS = "access:";//OAuth2AccessToken
+      private static final String AUTH_TO_ACCESS = "auth_to_access:";//OAuth2AccessToken
+      private static final String AUTH = "auth:";//OAuth2Authentication
+      private static final String CLIENT_ID_TO_ACCESS = "client_id_to_access:";//OAuth2AccessToken
+      private static final String UNAME_TO_ACCESS = "uname_to_access:";//OAuth2AccessToken
+      ```
+      + refresh_token
+      ```
+      private static final String REFRESH_AUTH = "refresh_auth:";//OAuth2Authentication
+      private static final String ACCESS_TO_REFRESH = "access_to_refresh:";//refresh_token
+      private static final String REFRESH = "refresh:";//OAuth2RefreshToken
+      private static final String REFRESH_TO_ACCESS = "refresh_to_access:";//refresh_token
+      ```
  
 
 
